@@ -1,6 +1,7 @@
 <?php
+//HW_1
+
 /*
-HW_1
 $firstName = "Slavik";
 $lastName = "Rublov";
 $age = 28;
@@ -42,6 +43,7 @@ var_dump($averageNumber);
 
 // HW_3
 
+/*
 $integer1 = 10;
 $integerString2 = "10";
 
@@ -119,5 +121,21 @@ echo  PHP_EOL;
 var_dump($nullVaribale == $bool2);//true
 var_dump($nullVaribale === $bool2);//false
 var_dump($nullVaribale == $nullString);//false
+*/
 
+//HW_4
 
+echo "Please enter namber" . PHP_EOL;
+
+$value = trim(fgets(STDIN));
+
+echo match ($value)
+{
+    1 => "$value - green" . PHP_EOL,
+    2 => "$value - red" . PHP_EOL,
+    3 => "$value - blue" . PHP_EOL,
+    4 => "$value - brown" . PHP_EOL,
+    5 => "$value - violet" . PHP_EOL,
+    6 => "$value - black" . PHP_EOL,
+    default => "$value - white" . PHP_EOL,
+};
