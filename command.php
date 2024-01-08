@@ -125,6 +125,7 @@ var_dump($nullVaribale == $nullString);//false
 
 //HW_4
 
+/*
 echo "Please enter namber" . PHP_EOL;
 
 $value = trim(fgets(STDIN));
@@ -139,3 +140,45 @@ echo match ($value)
     6 => "$value - black" . PHP_EOL,
     default => "$value - white" . PHP_EOL,
 };
+*/
+
+// WH_5
+
+function areaCircle(int|float $rCircle): int|float
+{
+    if($rCircle <= 0 )
+    {
+        echo 'incorrect value'. PHP_EOL;
+        return 0;
+    }
+    else
+    {
+        $area =($rCircle*2)*pi();
+        return ($area);
+    }
+}
+
+$rCircleUser=4;
+$area = areaCircle($rCircleUser);
+echo $area. PHP_EOL;
+
+function  powUser1(int|float $base, int $exponent): int|float
+{
+    $value= pow($base, $exponent);
+    return $value;
+}
+
+//$userBase=2;
+//$userExponent=2;
+//$powUser=sqrUser1($userBase,$userExponent);
+//echo $sqrUser. PHP_EOL;
+
+function  powUser2(int|float &$base, int $exponent)
+{
+    $base = pow($base, $exponent);
+}
+
+$userBase = 5;
+$userExponent = 2;
+powUser2($userBase,$userExponent);
+echo $userBase. PHP_EOL;
