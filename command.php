@@ -180,5 +180,6 @@ function  powUser2(int|float &$base, int $exponent)
 
 $userBase = 5;
 $userExponent = 2;
+
 powUser2($userBase,$userExponent);
 echo $userBase. PHP_EOL;
