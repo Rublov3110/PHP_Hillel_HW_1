@@ -146,32 +146,30 @@ echo match ($value)
 
 function areaCircle(int|float $rCircle): int|float
 {
-    if($rCircle <= 0 )
-    {
+    if ($rCircle <= 0) {
         echo 'incorrect value'. PHP_EOL;
         return 0;
-    }
-    else
+    } else
     {
-        $area =($rCircle*2)*pi();
+        $area = pi() * pow($rCircle, 2);
         return ($area);
     }
 }
 
-$rCircleUser=4;
+$rCircleUser = 4;
 $area = areaCircle($rCircleUser);
 echo $area. PHP_EOL;
 
 function  powUser1(int|float $base, int $exponent): int|float
 {
-    $value= pow($base, $exponent);
+    $value = pow($base, $exponent);
     return $value;
 }
 
-//$userBase=2;
-//$userExponent=2;
-//$powUser=sqrUser1($userBase,$userExponent);
-//echo $sqrUser. PHP_EOL;
+//$userBase = 2;
+//$userExponent = 2;
+//$powUser = sqrUser1($userBase, $userExponent);
+//echo $sqrUser . PHP_EOL;
 
 function  powUser2(int|float &$base, int $exponent)
 {
@@ -182,4 +180,4 @@ $userBase = 5;
 $userExponent = 2;
 
 powUser2($userBase,$userExponent);
-echo $userBase. PHP_EOL;
+echo $userBase . PHP_EOL;
