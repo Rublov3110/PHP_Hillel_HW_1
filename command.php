@@ -144,7 +144,8 @@ echo match ($value)
 
 // WH_5
 
-function areaCircle(int|float $rCircle): int|float
+/*
+ function areaCircle(int|float $rCircle): int|float
 {
     if ($rCircle <= 0) {
         echo 'incorrect value'. PHP_EOL;
@@ -181,3 +182,25 @@ $userExponent = 2;
 
 powUser2($userBase,$userExponent);
 echo $userBase . PHP_EOL;
+ */
+
+//HW_6
+
+function myFunction(int $value1, int $value2, ?Closure $callback = null) {
+    $result = $value1 * $value2;
+
+    if (isset($callback)) {
+        $callback($result);
+    }
+
+    return $result;
+}
+
+$printResult = function ($arg) {
+    echo $arg . PHP_EOL;
+};
+
+$result1 = myFunction(5, 10);
+$result2 = myFunction(5, 10, $printResult);
+
+echo $result1 . PHP_EOL;
