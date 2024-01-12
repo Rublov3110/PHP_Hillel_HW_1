@@ -1,6 +1,5 @@
 <?php
 //HW_1
-
 /*
 $firstName = "Slavik";
 $lastName = "Rublov";
@@ -12,7 +11,6 @@ echo $firstName," ",$lastName, " ", $age, "\n";
 */
 
 // HW_2
-
 /*
 $stringVaribale = "Please enter your first and last name";
 
@@ -42,7 +40,6 @@ var_dump($averageNumber);
 */
 
 // HW_3
-
 /*
 $integer1 = 10;
 $integerString2 = "10";
@@ -124,7 +121,6 @@ var_dump($nullVaribale == $nullString);//false
 */
 
 //HW_4
-
 /*
 echo "Please enter namber" . PHP_EOL;
 
@@ -143,7 +139,6 @@ echo match ($value)
 */
 
 // WH_5
-
 /*
  function areaCircle(int|float $rCircle): int|float
 {
@@ -185,7 +180,7 @@ echo $userBase . PHP_EOL;
  */
 
 //HW_6
-
+/*
 function myFunction(int $value1, int $value2, ?Closure $callback = null) {
     $result = $value1 * $value2;
 
@@ -204,3 +199,71 @@ $result1 = myFunction(5, 10);
 $result2 = myFunction(5, 10, $printResult);
 
 echo $result1 . PHP_EOL;
+*/
+
+//HW_7_8
+
+function ranArray(int $length, int $min, int $max): array
+{
+    $array = [];
+    for ($i = 0; count($array) < $length; $i++) {
+        $array[] = rand($min, $max);
+    }
+
+    return $array;
+}
+
+function writeArray(array $array): void
+{
+    sort($array);
+
+    foreach ($array as $value) {
+        echo $value . PHP_EOL;
+    }
+}
+
+function arrayMaxMin(array $array): void
+{
+    $arrayMin = min($array);
+    $arrayMax = max($array);
+
+    echo "Min: $arrayMin" . PHP_EOL;
+    echo "Max: $arrayMax" . PHP_EOL;
+}
+
+$arrayUser = ranArray(20, 1, 40);
+
+//writeArray($arrayUser);
+//arrayMaxMin($arrayUser);
+
+//1
+$i = 1;
+$line = 20;
+
+while ($i <= $line) {
+    //echo $i . PHP_EOL;
+    $i++;
+}
+
+//2
+$j = 1;
+$number = 5;
+$fact = 1;
+
+while ($j <= $number) {
+    $fact *= $j;
+    $j++;
+}
+
+echo "$number! = $fact" . PHP_EOL;
+
+//3
+$y = 1;
+$value = 20;
+
+while ($y <= $value) {
+    if ($y % 2 == 0) {
+        echo $y . PHP_EOL;
+    }
+    $y++;
+}
