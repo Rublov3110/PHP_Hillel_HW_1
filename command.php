@@ -271,14 +271,17 @@ while ($y <= $value) {
 
 //HW_9
 
-$length = 20;
-$min = 1;
-$max = 10;
-$array = [];
+function ranArray(int $length, int $min, int $max): array
+{
+    $array = [];
+    for ($i = 0; count($array) < $length; $i++) {
+        $array[] = rand($min, $max);
+    }
 
-for ($i = 0; $i < $length; $i++) {
-    $array[] = rand($min, $max);
+    return $array;
 }
+
+$array = ranArray (10, 1, 10);
 
 $summArray = 0;
 $multiArray = 1;
