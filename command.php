@@ -202,7 +202,7 @@ echo $result1 . PHP_EOL;
 */
 
 //HW_7_8
-
+/*
 function ranArray(int $length, int $min, int $max): array
 {
     $array = [];
@@ -267,3 +267,37 @@ while ($y <= $value) {
     }
     $y++;
 }
+*/
+
+//HW_9
+
+$length = 20;
+$min = 1;
+$max = 10;
+$array = [];
+
+for ($i = 0; count($array) < $length; $i++) {
+    $array[] = rand($min, $max);
+}
+
+$summArray = 0;
+$multiArray = 1;
+$number5 = 0;
+
+foreach ($array as $value) {
+    $summArray += $value;
+    $multiArray *= $value;
+    if ($value % 3 === 0) {
+        echo $value . PHP_EOL;
+    }
+    if ($value === 5) {
+        $number5++;
+    }
+}
+
+var_dump($summArray);
+var_dump($multiArray);
+var_dump($number5);
+
+
+
