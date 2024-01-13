@@ -276,7 +276,7 @@ $min = 1;
 $max = 10;
 $array = [];
 
-for ($i = 0; count($array) < $length; $i++) {
+for ($i = 0; $i < $length; $i++) {
     $array[] = rand($min, $max);
 }
 
