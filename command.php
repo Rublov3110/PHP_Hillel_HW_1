@@ -270,7 +270,7 @@ while ($y <= $value) {
 */
 
 //HW_9
-
+/*
 function ranArray(int $length, int $min, int $max): array
 {
     $array = [];
@@ -301,6 +301,28 @@ foreach ($array as $value) {
 var_dump($summArray);
 var_dump($multiArray);
 var_dump($number5);
+*/
 
+//HW_10
+
+function fibonacci($userNumber) {
+    $a = 0;
+    $b = 1;
+
+    while ($a < $userNumber) {
+        yield $a;
+        $c = $a + $b;
+        $a = $b;
+        $b = $c;
+    }
+}
+
+$userNumber = 100;
+
+$generator = fibonacci($userNumber);
+
+foreach ($generator as $number) {
+    echo $number . " ";
+}
 
 
