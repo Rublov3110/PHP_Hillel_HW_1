@@ -304,7 +304,7 @@ var_dump($number5);
 */
 
 //HW_10
-
+/*
 function fibonacci($userNumber) {
     $a = 0;
     $b = 1;
@@ -324,5 +324,37 @@ $generator = fibonacci($userNumber);
 foreach ($generator as $number) {
     echo $number . " ";
 }
+*/
+
+//HW_11
+
+function writFile($userText, $filePath)
+{
+    $file = fopen($filePath, 'a+');
+    fwrite($file, $userText . PHP_EOL);
+    fclose($file);
+}
+
+function readLastText($filePath): string|bool
+{
+    if (file_exists($filePath)) {
+        $file = fopen($filePath, 'r');
+        $content = fread($file, filesize($filePath));
+        fclose($file);
+        $args = explode(PHP_EOL, trim($content));
+        $lastArg = end($args);
+        return $lastArg;
+
+    } else {
+        echo "$filePath not find";
+        return false;
+    }
+}
+
+$filePath = 'user_text.txt';
+$userText = trim(fgets(STDIN));
+writFile($userText, $filePath);
+$value = readLastText($filePath);
+echo "Last argument = $value . PHP_EOL";
 
 
