@@ -328,26 +328,35 @@ foreach ($generator as $number) {
 
 //HW_11
 
-function writFile($userText, $filePath)
+function writFile(string $userText, string $filePath)
 {
     $file = fopen($filePath, 'a+');
-    fwrite($file, $userText . PHP_EOL);
-    fclose($file);
+    if (!$file) {
+        echo "$filePath dont open!!" . PHP_EOL;
+    } else {
+        fwrite($file, $userText . PHP_EOL);
+        fclose($file);
+//        echo "$filePath open!!" . PHP_EOL;
+    }
+
 }
 
-function readLastText($filePath): string|bool
+function readLastText(string $filePath): string|bool
 {
     if (file_exists($filePath)) {
         $file = fopen($filePath, 'r');
-        $content = fread($file, filesize($filePath));
-        fclose($file);
-        $args = explode(PHP_EOL, trim($content));
-        $lastArg = end($args);
-        return $lastArg;
-
+        if (!$file) {
+            echo "$filePath dont open!!" . PHP_EOL;
+            return "Error";
+        } else {
+            $content = file($filePath);
+            $lastArg = end($content);
+            fclose($file);
+            return $lastArg;
+        }
     } else {
-        echo "$filePath not find";
-        return false;
+        echo "$filePath not find ";
+        return "Error";
     }
 }
 
@@ -355,6 +364,6 @@ $filePath = 'user_text.txt';
 $userText = trim(fgets(STDIN));
 writFile($userText, $filePath);
 $value = readLastText($filePath);
-echo "Last argument = $value . PHP_EOL";
+echo "Last argument = $value" . PHP_EOL;
 
 
