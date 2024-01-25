@@ -327,7 +327,7 @@ foreach ($generator as $number) {
 */
 
 //HW_11
-
+/*
 function writFile(string $userText, string $filePath)
 {
     $file = fopen($filePath, 'a+');
@@ -365,5 +365,6 @@ $userText = trim(fgets(STDIN));
 writFile($userText, $filePath);
 $value = readLastText($filePath);
 echo "Last argument = $value" . PHP_EOL;
+*/
 
 
