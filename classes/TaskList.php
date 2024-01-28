@@ -17,10 +17,19 @@ class TaskList
      */
     private function setFilePath(string $filePath): void
     {
+        if(!file_exists($filePath)){
+            throw new Exception('Not file');
+        }
+
         $this->filePath = $filePath;
+
         if (filesize($filePath) != 0) {
             $this->getTaskArray();
         }
+    }
+    private function getFilePath(): string
+    {
+        return $this->filePath;
     }
 
     /**
@@ -37,7 +46,7 @@ class TaskList
     /**
      * @param int $priority
      */
-    private function setPriority(int $priority)
+    private function setPriority(int $priority): void
     {
         if ($priority <= 0) {
             throw new Exception('Invalid priority');
@@ -66,7 +75,7 @@ class TaskList
         $this->saveTasksToFile();
     }
 
-    public function deleteTask($taskId)
+    public function deleteTask(int $taskId)
     {
         foreach ($this->tasks as $key => $task) {
             if ($task['id'] == $taskId) {
@@ -76,7 +85,7 @@ class TaskList
         $this->saveTasksToFile();
     }
 
-    public function changeStatus($taskId, $newStatus)
+    public function changeStatus(int $taskId, TaskStatus $newStatus)
     {
         foreach ($this->tasks as &$task) {
             if ($task['id'] == $taskId) {
@@ -88,7 +97,7 @@ class TaskList
 
     private function getTaskArray()
     {
-        $filePath = $this->filePath;
+        $filePath = $this->getFilePath();
         $fileContent = file_get_contents($filePath);
         $lines = explode(PHP_EOL, $fileContent);
 
@@ -108,7 +117,7 @@ class TaskList
 
     private function saveTasksToFile()
     {
-        $filePath = $this->filePath;
+        $filePath = $this->getFilePath();;
         $taskString = '';
         $file = fopen($filePath, 'w');
         foreach ($this->tasks as $task) {
