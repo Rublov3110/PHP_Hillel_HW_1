@@ -5,8 +5,7 @@ class TaskList
     private string $filePath;
     private string $taskName;
     private int $priority;
-
-//    private $tasks = [];
+    private $tasks = [];
 
     public function __construct(string $filePath)
     {
@@ -16,19 +15,22 @@ class TaskList
     /**
      * @param string $filePath
      */
-    public function setFilePath(string $filePath): void
+    private function setFilePath(string $filePath): void
     {
-//        if (!file_exists($filePath)) {
-//            throw new Exception('File not found');
-//        }
         $this->filePath = $filePath;
+        if (filesize($filePath) != 0) {
+            $this->getTaskArray();
+        }
     }
 
     /**
      * @param string $taskName
      */
-    public function setTaskName(string $taskName): void
+    private function setTaskName(string $taskName): void
     {
+        if ($taskName === null) {
+            throw new Exception('Invalid Task');
+        }
         $this->taskName = $taskName;
     }
 
@@ -37,6 +39,9 @@ class TaskList
      */
     private function setPriority(int $priority)
     {
+        if ($priority <= 0) {
+            throw new Exception('Invalid priority');
+        }
         $this->priority = $priority;
     }
 
@@ -44,65 +49,74 @@ class TaskList
     {
         $this->setTaskName($taskName);
         $this->setPriority($priority);
-        $taskArray=[];
 
-        $taskID = uniqid();
-        $taskArray[] = [
-            'id' => $taskID,
-            'name' => $taskName,
-            'priority' => $priority,
-            'status' => TaskStatus::NOT_COMPLETED,
-        ];
-//        foreach ($taskArray as $taskId => $task) {
-//                echo "$taskId, id: {$task['id']} Завдання: {$task['name']}, Пріоритет: {$task['priority']}, Стан: {$task['status']}\n";
-//            }
-        $this->saveTasksToFile($taskArray);
+        $taskId = count($this->tasks) + 1;
+        $taskInfo = ["id" => $taskId, "name" => $this->taskName, "priority" => $this->priority, "status" => TaskStatus::NOT_COMPLETED];
+        $this->tasks[] = $taskInfo;
+
+        $this->saveTasksToFile();
     }
 
     public function getTasks()
     {
-        $taskArray = $this->getTaskArray();
-
-        usort($taskArray, function ($a, $b) {
+        usort($this->tasks, function ($a, $b) {
             return $a['priority'] - $b['priority'];
         });
 
-        $this->saveTasksToFile($taskArray);
+        $this->saveTasksToFile();
     }
 
-    private function getTaskArray(): array|bool
+    public function deleteTask($taskId)
     {
-        $filePath = $this->filePath;
-        $fileContent = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $taskArray = [];
-        if ($fileContent !== false) {
-            foreach ($fileContent as $line) {
-
-                $taskData = explode(',', $line);
-
-                $taskArray[] = [
-                    'id' => $taskData[0],
-                    'name' => $taskData[1],
-                    'priority' => $taskData[2],
-                    'status' => $taskData[3],
-                ];
+        foreach ($this->tasks as $key => $task) {
+            if ($task['id'] == $taskId) {
+                unset($this->tasks[$key]);
             }
         }
-
-        return $taskArray;
+        $this->saveTasksToFile();
     }
 
-    private function saveTasksToFile(array $taskArray)
+    public function changeStatus($taskId, $newStatus)
+    {
+        foreach ($this->tasks as &$task) {
+            if ($task['id'] == $taskId) {
+                $task['status'] = $newStatus;
+            }
+        }
+        $this->saveTasksToFile();
+    }
+
+    private function getTaskArray()
     {
         $filePath = $this->filePath;
-        $file = fopen($filePath, 'a+');
-            foreach ($taskArray as $task) {
-                fwrite($file, implode(', ', $task) . PHP_EOL);
-            }
+        $fileContent = file_get_contents($filePath);
+        $lines = explode(PHP_EOL, $fileContent);
+
+        foreach ($lines as $line) {
+            $taskData = explode(',', $line);
+            $taskInfo = [
+                'id' => $taskData[0],
+                'name' => $taskData[1],
+                'priority' => $taskData[2],
+                'status' => $taskData[3],
+            ];
+            $this->tasks[] = $taskInfo;
+        }
+
+
+    }
+
+    private function saveTasksToFile()
+    {
+        $filePath = $this->filePath;
+        $taskString = '';
+        $file = fopen($filePath, 'w');
+        foreach ($this->tasks as $task) {
+            $taskString .= implode(',', $task) . PHP_EOL;
+        }
+        fwrite($file, $taskString);
         fclose($file);
-//                foreach ($taskArray as $taskId => $task) {
-//                echo "$taskId, id: {$task['id']} Завдання: {$task['name']}, Пріоритет: {$task['priority']}, Стан: {$task['status']}\n";
-//            }
+
     }
 
 }
