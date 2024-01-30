@@ -33,6 +33,7 @@ define('APP_DIR', __DIR__ . '/');
 
 //WH_14
 require_once APP_DIR . 'HW_14/BaseClass.php';
+require_once APP_DIR . 'HW_14/DerivedClass.php';
 
 $baseObj = new BaseClass();
 $derivedObj = new DerivedClass();
