@@ -18,17 +18,24 @@ define('APP_DIR', __DIR__ . '/');
 //$ferstTaskList->changeStatus(2, TaskStatus::COMPLETED);
 
 //HW_13
-require_once APP_DIR . 'HW_13/BankAccount.php';
-try {
-    $ferst = new BankAccount(123456, 1000);
+//require_once APP_DIR . 'HW_13/BankAccount.php';
+//try {
+//    $ferst = new BankAccount(123456, 1000);
+//
+//    echo $ferst->AddMoney(0) . PHP_EOL;
+////    echo $ferst->MinusMoney(500) . PHP_EOL;
+////    echo $ferst->MinusMoney(700) . PHP_EOL;
+//} catch (Exception $exception)
+//{
+//    echo $exception->getMessage();
+//    exit();
+//}
 
-    echo $ferst->AddMoney(0) . PHP_EOL;
-//    echo $ferst->MinusMoney(500) . PHP_EOL;
-//    echo $ferst->MinusMoney(700) . PHP_EOL;
-} catch (Exception $exception)
-{
-    echo $exception->getMessage();
-    exit();
-}
+//WH_14
+require_once APP_DIR . 'HW_14/BaseClass.php';
 
+$baseObj = new BaseClass();
+$derivedObj = new DerivedClass();
 
+$baseObj->printText();
+$derivedObj->printText();
