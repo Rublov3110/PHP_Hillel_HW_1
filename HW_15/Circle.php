@@ -37,11 +37,11 @@ class Circle extends Figure
     {
         return $this->perimeter;
     }
-    public function Area()
+    protected function Area()
     {
         $this->setArea(pi() * pow($this->getRadius(),2));
     }
-    public function Perimeter()
+    protected function Perimeter()
     {
        $this->setPerimeter(2 * pi() * $this->getRadius());
     }

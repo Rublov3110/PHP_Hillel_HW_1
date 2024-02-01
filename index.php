@@ -42,18 +42,35 @@ define('APP_DIR', __DIR__ . '/');
 //$derivedObj->printText();
 
 //HW_15
-require_once APP_DIR . 'HW_15/Figure.php';
-require_once APP_DIR . 'HW_15/Circle.php';
-require_once APP_DIR . 'HW_15/Rectangle.php';
-try {
-$circle = new Circle(5);
-$rectanglr = new Rectangle(7, 8);
-$rectanglr->PrintArea();
-$rectanglr->PrintPerimeter();
-$circle->PrintArea();
-$circle->PrintPerimeter();
-} catch (Exception $exception)
-{
-    echo $exception->getMessage();
-    exit();
-}
+//require_once APP_DIR . 'HW_15/Figure.php';
+//require_once APP_DIR . 'HW_15/Circle.php';
+//require_once APP_DIR . 'HW_15/Rectangle.php';
+//try {
+//$circle = new Circle(5);
+//$rectanglr = new Rectangle(7, 8);
+//$rectanglr->PrintArea();
+//$rectanglr->PrintPerimeter();
+//$circle->PrintArea();
+//$circle->PrintPerimeter();
+//} catch (Exception $exception)
+//{
+//    echo $exception->getMessage();
+//    exit();
+//}
+
+//HW_16
+require_once APP_DIR . 'HW_16/trait/LoggerTrait.php';
+require_once APP_DIR . 'HW_16/Product.php';
+require_once APP_DIR . 'HW_16/User.php';
+
+
+$user = new User('Slavik', 'Rublov');
+$product = new Product('Monitir', "blak");
+
+$user->Log("Slavik", "Rublov");
+$user->TestFunction(29);
+$product->Log("Monitir", "blak");
+$product->TestProduct(5000);
+
+//$user->logToFile("User {$user->name} created with email {$user->email}");
+//$product->logToFile("Product {$product->productName} created with price {$product->price}");
