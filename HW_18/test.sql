@@ -54,7 +54,6 @@ CREATE TABLE film_genre
 INSERT INTO `list_of_films`(`name`,`year`,`budget`,`timing_min`) VALUES ('The Shawshank Redemption', 1998, 25000000, 162);
 INSERT INTO `list_of_films`(`name`,`year`,`budget`,`timing_min`) VALUES ('Spider-Man: Web of Universes', 2022, 150000000, 140);
 INSERT INTO `list_of_films`(`name`,`year`,`budget`,`timing_min`) VALUES ('Green Mile', 1998, 60000000, 140);
-
 INSERT INTO `genre`(`genre_name`) VALUES ('drama'), ('thriller'), ('animation'), ('action movie');
 INSERT INTO `genre`(`genre_name`) VALUES ('action movie');
 INSERT INTO `film_genre`(`film_id`, `genre_id`) VALUES (1, 2), (2, 3), (2, 4), (3, 1), (3, 2);
