@@ -59,18 +59,55 @@ define('APP_DIR', __DIR__ . '/');
 //}
 
 //HW_16
-require_once APP_DIR . 'HW_16/trait/LoggerTrait.php';
-require_once APP_DIR . 'HW_16/Product.php';
-require_once APP_DIR . 'HW_16/User.php';
-
-
-$user = new User('Slavik', 'Rublov');
-$product = new Product('Monitir', "blak");
-
-$user->Log("Slavik", "Rublov");
-$user->TestFunction(29);
-$product->Log("Monitir", "blak");
-$product->TestProduct(5000);
+//require_once APP_DIR . 'HW_16/trait/LoggerTrait.php';
+//require_once APP_DIR . 'HW_16/Product.php';
+//require_once APP_DIR . 'HW_16/User.php';
+//
+//
+//$user = new User('Slavik', 'Rublov');
+//$product = new Product('Monitir', "blak");
+//
+//$user->Log("Slavik", "Rublov");
+//$user->TestFunction(29);
+//$product->Log("Monitir", "blak");
+//$product->TestProduct(5000);
 
 //$user->logToFile("User {$user->name} created with email {$user->email}");
 //$product->logToFile("Product {$product->productName} created with price {$product->price}");
+
+//HW_19
+
+require_once APP_DIR . 'HW_19/config.php';
+require_once APP_DIR . 'HW_19/Connector.php';
+
+function generatorFetch(PDOStatement $stnt): Generator
+{
+    while ($list = $stnt->fetch()) {
+        yield $list;
+    }
+}
+
+$db = Connector::getInstance();
+
+//$sql = "INSERT INTO `list_of_films`(`name`,`year`,`budget`,`timing_min`) VALUES ('Test2', 2000, 25, 60)";
+//$sql = "INSERT INTO `genre`(`genre_name`) VALUES ('test_genre')";
+//$sql = "UPDATE `list_of_films` SET `name` = 'Test2' WHERE `name` = 'Test1'";
+//$sql = "DELETE FROM `list_of_films` WHERE `id` = 4";
+//$db ->query($sql);
+
+//$sql = "SELECT * FROM `list_of_films`";
+//$stnt = $db->query($sql);
+//
+
+$user_value = "Test2";
+$sql = "SELECT * FROM `list_of_films` WHERE `name` = ? AND `deleted_at` IS NULL";
+$stnt = $db->prepare($sql);
+$stnt->execute([$user_value]);
+
+foreach (generatorFetch($stnt) as $list){
+    echo "<pre>";
+    print_r($list);
+    echo "<pre>";
+}
+
+//var_dump($db);
